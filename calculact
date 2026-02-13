@@ -1,0 +1,75 @@
+import math
+import cmath
+from parser import safe_eval
+from matrix import Matrix
+
+class AdvancedCalculator:
+
+    def scientific(self, expression):
+        return safe_eval(expression)
+
+    def complex_operation(self, expression):
+        return safe_eval(expression, complex_mode=True)
+
+    def solve_quadratic(self, a, b, c):
+        discriminant = b**2 - 4*a*c
+        root1 = (-b + cmath.sqrt(discriminant)) / (2*a)
+        root2 = (-b - cmath.sqrt(discriminant)) / (2*a)
+        return root1, root2
+
+    def matrix_add(self, A, B):
+        return A + B
+
+    def matrix_multiply(self, A, B):
+        return A * B
+
+    def matrix_determinant(self, A):
+        return A.determinant()
+
+
+def main():
+    calc = AdvancedCalculator()
+
+    print("=== Advanced Python Calculator ===")
+    print("1. Scientific Calculation")
+    print("2. Complex Calculation")
+    print("3. Solve Quadratic Equation")
+    print("4. Matrix Operations")
+
+    choice = input("Choose option: ")
+
+    if choice == "1":
+        expr = input("Enter expression: ")
+        print("Result:", calc.scientific(expr))
+
+    elif choice == "2":
+        expr = input("Enter complex expression: ")
+        print("Result:", calc.complex_operation(expr))
+
+    elif choice == "3":
+        a = float(input("a: "))
+        b = float(input("b: "))
+        c = float(input("c: "))
+        roots = calc.solve_quadratic(a, b, c)
+        print("Roots:", roots)
+
+    elif choice == "4":
+        print("Matrix A")
+        A = Matrix.from_input()
+        print("Matrix B")
+        B = Matrix.from_input()
+
+        print("1. Add")
+        print("2. Multiply")
+        print("3. Determinant of A")
+        op = input("Choose: ")
+
+        if op == "1":
+            print(calc.matrix_add(A, B))
+        elif op == "2":
+            print(calc.matrix_multiply(A, B))
+        elif op == "3":
+            print(calc.matrix_determinant(A))
+
+if __name__ == "__main__":
+    main()
